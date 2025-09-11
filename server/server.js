@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from "./db.js";
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import testRoutes from "./routes/testRoutes.js";
 
 dotenv.config(); 
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/tests', testRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
