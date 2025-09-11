@@ -6,6 +6,7 @@ import connectDB from "./db.js";
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import testRoutes from "./routes/testRoutes.js";
+import resultRoutes from './routes/resultRoutes.js';
 
 dotenv.config(); 
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/tests', testRoutes);
+app.use('/api/results', resultRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

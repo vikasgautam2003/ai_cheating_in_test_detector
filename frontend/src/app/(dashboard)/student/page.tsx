@@ -1,165 +1,6 @@
 
 
 
-// 'use client';
-
-// import { useRouter } from "next/navigation";
-// import { useEffect, useState } from "react";
-
-// // No changes to interfaces
-// interface User {
-//   _id: string;
-//   email: string;
-//   role: string;
-// }
-
-// interface Test {
-//   _id: string;
-//   title: string;
-//   duration: number;
-//   questions: any[];
-//   createdBy: {
-//     _id: string;
-//     email: string;
-//   };
-// }
-
-
-// export default function StudentDashboardPage() {
-//   const router = useRouter();
-//   const [user, setUser] = useState<User | null>(null);
-//   const [tests, setTests] = useState<Test[]>([]);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [error, setError] = useState<string | null>(null);
-
-//   // No changes to the data fetching logic
-//   useEffect(() => {
-//     const fetchUser = async () => {
-//       const token = localStorage.getItem('token');
-//       if (!token) {
-//         router.push('/auth/login');
-//         return;
-//       }
-
-//       try {
-//         const [userResponse, testsResponse] = await Promise.all([
-//           fetch('http://localhost:5000/api/user', {
-//             headers: { 'Authorization': `Bearer ${token}` },
-//           }),
-//           fetch('http://localhost:5000/api/tests', {
-//             headers: { 'Authorization': `Bearer ${token}` },
-//           }),
-//         ]);
-
-
-//         if (!userResponse.ok || !testsResponse.ok) throw new Error('Failed to fetch dashboard data.');
-        
-//         const userData: User = await userResponse.json();
-//         const testsData: Test[] = await testsResponse.json();
-
-//         setUser(userData);
-//         setTests(testsData);
-
-//       } catch (err: any) {
-//         setError(err.message);
-//         localStorage.removeItem('token');
-//         router.push('/auth/login');
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-
-//     fetchUser();
-//   }, [router]);
-
-
-//   // No changes to the logout handler
-//   const handleLogout = () => {
-//     localStorage.removeItem('token');
-//     router.push('/auth/login');
-//   };
-
-//   // Styled Loading State
-//   if (isLoading) {
-//     return (
-//       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-//         <p className="text-xl text-gray-400">Loading your dashboard...</p>
-//       </div>
-//     );
-//   }
-  
-//   // Styled Error State
-//   if (error) {
-//      return (
-//       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-red-400">
-//         <p className="text-xl">Error: {error}</p>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="bg-gray-900 text-gray-100 min-h-screen font-sans">
-//       <div className="container mx-auto p-4 sm:p-6 lg:p-8">
-        
-//         {/* === Header Section === */}
-//         <header className="flex justify-between items-center mb-10 pb-4 border-b border-gray-700">
-//           <h1 className="text-2xl md:text-3xl font-bold">
-//             Welcome, <span className="text-cyan-400">{user?.email}!</span>
-//           </h1>
-//           <button 
-//             onClick={handleLogout}
-//             className="bg-transparent border border-red-500 text-red-500 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-500 hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
-//           >
-//             Logout
-//           </button>
-//         </header>
-
-//         {/* === Available Tests Section === */}
-//         <main>
-//           <h2 className="text-xl md:text-2xl font-semibold mb-6">Available Mock Tests</h2>
-
-//           {tests.length === 0 ? (
-//             <div className="text-center py-20">
-//                 <p className="text-gray-400">No tests are available at the moment. Please check back later.</p>
-//             </div>
-//           ) : (
-//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//               {tests.map((test) => (
-//                 <div 
-//                   key={test._id} 
-//                   className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col"
-//                 >
-//                   <div className="flex-grow">
-//                     <h3 className="text-lg font-bold text-white mb-2">{test.title}</h3>
-//                     <p className="text-sm text-gray-400 mb-4">
-//                       Duration: {test.duration} minutes
-//                     </p>
-//                      <p className="text-xs text-gray-500 mb-6">
-//                       Created by: <span className="font-medium text-gray-400">{test.createdBy.email}</span>
-//                     </p>
-//                   </div>
-//                   <button 
-//                     onClick={() => alert(`Starting test: ${test.title}`)}
-//                     className="w-full mt-auto bg-cyan-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-75 transition-colors duration-300"
-//                   >
-//                     Start Test
-//                   </button>
-//                 </div>
-//               ))}
-//             </div>
-//           )}
-//         </main>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
 
 
 
@@ -198,6 +39,7 @@ const NoTestsIcon = () => (
 
 
 export default function StudentDashboardPage() {
+  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [tests, setTests] = useState<Test[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -321,7 +163,7 @@ export default function StudentDashboardPage() {
                     </p>
                   </div>
                   <button 
-                    onClick={() => setSelectedTest(test)}
+                    onClick={() => router.push(`/test/${test._id}`)}
                     className="w-full mt-auto bg-gradient-to-r from-purple-800 to-indigo-800 text-white font-semibold py-2 px-4 rounded-lg hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all"
                   >
                     Start Test
