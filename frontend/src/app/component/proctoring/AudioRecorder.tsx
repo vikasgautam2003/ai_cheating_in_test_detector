@@ -75,7 +75,7 @@ export default function AudioRecorder({ onAudioRecorded }: AudioRecorderProps) {
           {recordingStatus === 'finished' && (
             <div className="w-full text-center">
               <p className="text-green-600 mb-2">Recording complete. You can review it below.</p>
-              <audio src={audioUrl || ''} controls className="w-full" />
+              <audio src={audioUrl || undefined} controls className="w-full" />
               <button onClick={() => setRecordingStatus('idle')} className="text-sm text-blue-500 mt-2">Record Again</button>
             </div>
           )}

@@ -1,5 +1,5 @@
 import express from "express";
-import { createTest, getAllTests, getTestById, submitTest } from "../controllers/testController.js";
+import { createTest, getAllTests, getTestById, startTest} from "../controllers/testController.js";
 import auth from "../middlewares/auth.js";
 import adminMiddleware from "../middlewares/adminMiddleware.js";
 
@@ -11,7 +11,9 @@ router.get('/', auth, getAllTests);
 
 router.get("/:id", auth, getTestById);
 
-router.post("/:id/submit", auth, submitTest);
+router.post('/:id/start', auth, startTest);
+
+// router.post("/:id/submit", auth, submitTest);
 
 export default router;
 

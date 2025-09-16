@@ -23,7 +23,18 @@ const attemptSchema = new mongoose.Schema({
   totalMarks: {
     type: Number,
     required: true,
-  }
+  },
+
+   proctoringLogs: [{
+    type: {
+      type: String, 
+      required: true,
+    },
+    timestamp: {
+      type: Date,
+      default: Date.now,
+    },
+  }],
 }, { timestamps: true });
 
 const Attempt = mongoose.model('Attempt', attemptSchema);

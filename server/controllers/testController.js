@@ -97,37 +97,69 @@ export const getTestById = async (req, res) => {
 
 
 
-export const submitTest = async (req, res) => {
+// export const submitTest = async (req, res) => {
+//   try {
+//     const { answers } = req.body;
+//     const testId = req.params.id;
+//     const studentId = req.user.id || req.user._id;
+
+//     const originalTest = await Test.findById(testId);
+
+//     if (!originalTest) {
+//       return res.status(404).json({ message: "Test not found" });
+//     }
+
+//     let score = 0;
+//     originalTest.questions.forEach((question, index) => {
+//       if (answers[index] && question.correctAnswer === answers[index]) {
+//         score++;
+//       }
+//     });
+
+//     const newAttempt = new Attempt({
+//       testId,
+//       studentId,
+//       answers,
+//       score,
+//       totalMarks: originalTest.questions.length,
+//     });
+
+//     const savedAttempt = await newAttempt.save();
+
+//     res.status(201).json(savedAttempt);
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error", error: error.message });
+//   }
+// };
+
+
+export const startTest = async (req, res) => {
   try {
-    const { answers } = req.body;
     const testId = req.params.id;
-    const studentId = req.user.id || req.user._id;
+    const studentId = req.user.id; 
 
-    const originalTest = await Test.findById(testId);
 
-    if (!originalTest) {
-      return res.status(404).json({ message: "Test not found" });
+    const test = await Test.findById(testId);
+    if (!test) {
+      return res.status(404).json({ message: 'Test not found.' });
     }
 
-    let score = 0;
-    originalTest.questions.forEach((question, index) => {
-      if (answers[index] && question.correctAnswer === answers[index]) {
-        score++;
-      }
-    });
-
+ 
     const newAttempt = new Attempt({
       testId,
       studentId,
-      answers,
-      score,
-      totalMarks: originalTest.questions.length,
+      answers: {}, 
+      score: 0,    
+      totalMarks: test.questions.length,
+      proctoringLogs: [], 
     });
 
-    const savedAttempt = await newAttempt.save();
+    await newAttempt.save();
 
-    res.status(201).json(savedAttempt);
+    
+    res.status(201).json({ attemptId: newAttempt._id });
+
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: 'Server error while starting test.', error });
   }
 };

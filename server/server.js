@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import testRoutes from "./routes/testRoutes.js";
 import resultRoutes from './routes/resultRoutes.js';
+import attemptRoutes from './routes/attemptRoutes.js'
 
 dotenv.config(); 
 
@@ -23,6 +24,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/tests', testRoutes);
 app.use('/api/results', resultRoutes);
+app.use('/api/attempts', attemptRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
