@@ -30,8 +30,15 @@
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import AboutSection from './home/About';
+import WhyUsSection from './home/Why';
+import HowToTestSection from './home/How';
+import TestimonialSection from './home/Testimonials';
+import FaqSection from './home/FAQ';
+import GodlyFooter from './home/Footer';
 
-// --- SVG Icon Components ---
+
+
 const EyeIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 mb-4 text-blue-400"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
 );
@@ -47,8 +54,13 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-950 text-gray-200 font-sans">
       <Navbar />
       <HeroSection />
+      <AboutSection />
       <FeaturesSection />
-      <Footer />
+      <WhyUsSection />
+      <HowToTestSection />
+      <TestimonialSection />
+      <FaqSection />
+      <GodlyFooter />
     </div>
   );
 }
@@ -313,6 +325,10 @@ const HeroSection = () => {
 
 
 
+
+
+
+
 const FeaturesSection = () => {
   const features = [
     { icon: <EyeIcon />, title: "AI-Powered Monitoring", description: "Real-time analysis of video and audio feeds to detect violations like multiple faces, unauthorized voices, and tab switching." },
@@ -355,15 +371,7 @@ const FeaturesSection = () => {
   );
 };
 
-const Footer = () => {
-  return (
-    <footer className="py-8 bg-gray-950 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto text-center text-gray-500">
-        <p>&copy; {new Date().getFullYear()} Sentinel.ai. All Rights Reserved.</p>
-      </div>
-    </footer>
-  );
-};
+
 
 const style = `
   .bg-grid-pattern {

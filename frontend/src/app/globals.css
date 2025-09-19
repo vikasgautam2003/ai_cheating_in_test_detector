@@ -2,3 +2,14 @@
 
 
 
+body {
+  font-family: var(--font-geist-sans);
+}
+
+.font-serif {
+  font-family: var(--font-playfair);
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono);
+}
