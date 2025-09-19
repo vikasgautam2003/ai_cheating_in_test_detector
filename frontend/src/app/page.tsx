@@ -29,6 +29,7 @@
 
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
 
 // --- SVG Icon Components ---
 const EyeIcon = () => (
@@ -52,23 +53,63 @@ export default function HomePage() {
   );
 }
 
+// const Navbar = () => {
+//   return (
+//     <motion.nav 
+//       initial={{ y: -100 }}
+//       animate={{ y: 0 }}
+//       transition={{ duration: 0.5, ease: "easeOut" }}
+//       className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 bg-gray-950/50 backdrop-blur-lg"
+//     >
+//       <div className="max-w-screen mx-auto flex justify-between items-center">
+//         <Link href="/" className="text-3xl font-bold text-white">
+//           Sentinel.ai
+//         </Link>
+//         <div className="flex items-center gap-4">
+//           <Link href="/auth/login" className="text-gray-300 text-1xl hover:text-white transition-colors">
+//             Login
+//           </Link>
+//           <Link href="/auth/signup" className="bg-blue-600 text-white py-2 px-5 rounded-lg hover:bg-blue-700 transition-colors">
+//             Sign Up
+//           </Link>
+//         </div>
+//       </div>
+//     </motion.nav>
+//   );
+// };
+
+
+
+
 const Navbar = () => {
   return (
-    <motion.nav 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 bg-gray-950/50 backdrop-blur-lg"
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5 font-['Roboto']"
     >
       <div className="max-w-screen mx-auto flex justify-between items-center">
-        <Link href="/" className="text-3xl font-bold text-white">
+        {/* Logo / Brand */}
+        <Link
+          href="/"
+          className="text-3xl font-extrabold tracking-wide text-white  bg-clip-text  hover:scale-105 transition-transform duration-300"
+        >
           Sentinel.ai
         </Link>
-        <div className="flex items-center gap-4">
-          <Link href="/auth/login" className="text-gray-300 text-1xl hover:text-white transition-colors">
+
+        {/* Nav Actions */}
+        <div className="flex items-center gap-6">
+          <Link
+            href="/auth/login"
+            className="text-gray-300 text-lg hover:text-blue-400 hover:scale-105 transition-all duration-300"
+          >
             Login
           </Link>
-          <Link href="/auth/signup" className="bg-blue-600 text-white py-2 px-5 rounded-lg hover:bg-blue-700 transition-colors">
+          <Link
+            href="/auth/signup"
+            className="relative text-white text-lg font-medium px-6 py-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-lg shadow-blue-500/20"
+          >
             Sign Up
           </Link>
         </div>
@@ -78,72 +119,34 @@ const Navbar = () => {
 };
 
 
-// const HeroSection = () => {
-//   const title = "Ensuring Academic Integrity with Intelligent AI Proctoring";
 
-//   const titleVariants: Variants = {
-//     hidden: { opacity: 0 },
-//     visible: { opacity: 1, transition: { staggerChildren: 0.05 } }
-//   };
 
-//   const letterVariants: Variants = {
-//     hidden: { opacity: 0, y: 20 },
-//     visible: { opacity: 1, y: 0 }
-//   };
 
-//   return (
-//     <section className="h-screen flex items-center justify-center text-center bg-grid-pattern pt-28 px-6 sm:px-8 md:px-12">
-//       <div className="max-w-7xl mx-auto">
-//         <motion.h1 
-//           variants={titleVariants}
-//           initial="hidden"
-//           animate="visible"
-//           className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-extrabold text-white mb-6 leading-tight"
-//         >
-//           {title.split(" ").map((word, wordIndex) => (
-//             <span key={wordIndex} className="inline-block mr-3">
-//               {word.split("").map((letter, letterIndex) => (
-//                 <motion.span key={letterIndex} variants={letterVariants} className="inline-block">
-//                   {letter}
-//                 </motion.span>
-//               ))}
-//             </span>
-//           ))}
-//         </motion.h1>
-
-//         <motion.p 
-//           initial={{ opacity: 0, y: 20 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.5, delay: 1.5 }}
-//           className="text-lg md:text-xl text-gray-400 mb-10 max-w-4xl mx-auto"
-//         >
-//           Our cutting-edge platform provides unbiased, secure, and scalable online examination monitoring to uphold the standard of your assessments.
-//         </motion.p>
-        
-//         <motion.div
-//           initial={{ opacity: 0, scale: 0.8 }}
-//           animate={{ opacity: 1, scale: 1 }}
-//           transition={{ duration: 0.5, delay: 2 }}
-//         >
-//           <Link href="/auth/login" className="bg-blue-600 text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-blue-700 transition-transform hover:scale-105">
-//             Get Started
-//           </Link>
-//         </motion.div>
-//       </div>
-//     </section>
-//   );
-// };
 
 
 const HeroSection = () => {
   const title = "Ensuring Academic Integrity with Intelligent AI Proctoring";
 
+  // ✅ Client-safe window dimensions
+  const [dimensions, setDimensions] = useState<{ w: number; h: number }>({
+    w: 0,
+    h: 0,
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const updateDimensions = () =>
+        setDimensions({ w: window.innerWidth, h: window.innerHeight });
+
+      updateDimensions();
+      window.addEventListener("resize", updateDimensions);
+      return () => window.removeEventListener("resize", updateDimensions);
+    }
+  }, []);
+
   const titleVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.05 }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
   };
 
   const letterVariants: Variants = {
@@ -152,8 +155,8 @@ const HeroSection = () => {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.4, ease: "easeOut" }
-    }
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
   };
 
   return (
@@ -162,35 +165,36 @@ const HeroSection = () => {
       <motion.div
         className="absolute inset-0"
         animate={{
-          backgroundPosition: ["0px 0px", "40px 40px", "0px 0px"]
+          backgroundPosition: ["0px 0px", "40px 40px", "0px 0px"],
         }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       />
 
       {/* holographic shards */}
-      {[...Array(10)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-10 h-10 border border-blue-400/30"
-          style={{ clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }}
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            rotate: 0,
-            opacity: 0.2
-          }}
-          animate={{
-            y: [null, -200],
-            rotate: 360,
-            opacity: [0.2, 0.8, 0.2]
-          }}
-          transition={{
-            duration: 12 + Math.random() * 6,
-            repeat: Infinity,
-            delay: Math.random() * 5
-          }}
-        />
-      ))}
+      {dimensions.w > 0 &&
+        [...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-10 h-10 border border-blue-400/30"
+            style={{ clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }}
+            initial={{
+              x: Math.random() * dimensions.w,
+              y: Math.random() * dimensions.h,
+              rotate: 0,
+              opacity: 0.2,
+            }}
+            animate={{
+              y: [null, -200],
+              rotate: 360,
+              opacity: [0.2, 0.8, 0.2],
+            }}
+            transition={{
+              duration: 12 + Math.random() * 6,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+            }}
+          />
+        ))}
 
       {/* scanning pulse */}
       <motion.div
@@ -207,28 +211,30 @@ const HeroSection = () => {
       />
 
       {/* floating particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-blue-400 rounded-full"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: 0
-            }}
-            animate={{
-              y: [null, -30],
-              opacity: [0, 1, 0]
-            }}
-            transition={{
-              duration: 6 + Math.random() * 4,
-              repeat: Infinity,
-              delay: Math.random() * 5
-            }}
-          />
-        ))}
-      </div>
+      {dimensions.w > 0 && (
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(30)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400 rounded-full"
+              initial={{
+                x: Math.random() * dimensions.w,
+                y: Math.random() * dimensions.h,
+                opacity: 0,
+              }}
+              animate={{
+                y: [null, -30],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 6 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* main content */}
       <div className="relative max-w-7xl mx-auto z-10">
@@ -249,7 +255,7 @@ const HeroSection = () => {
                     scale: 1.2,
                     rotate: 5,
                     color: "#60A5FA",
-                    textShadow: "0px 0px 8px #3b82f6"
+                    textShadow: "0px 0px 8px #3b82f6",
                   }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -260,12 +266,12 @@ const HeroSection = () => {
           ))}
         </motion.h1>
 
-        {/* glitch effect pass */}
+        {/* glitch effect */}
         <motion.div
           className="absolute inset-x-0 top-1/3 text-white opacity-20 pointer-events-none select-none"
           animate={{
             x: [0, -5, 5, -3, 0],
-            opacity: [0, 0.5, 0]
+            opacity: [0, 0.5, 0],
           }}
           transition={{ duration: 1, repeat: Infinity, repeatDelay: 6 }}
         >
@@ -304,7 +310,6 @@ const HeroSection = () => {
     </section>
   );
 };
-
 
 
 

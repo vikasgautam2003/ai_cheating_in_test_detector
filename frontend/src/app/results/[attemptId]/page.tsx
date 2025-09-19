@@ -2,11 +2,17 @@
 
 
 
+
+
+
+
+
 // 'use client';
 
 // import { useEffect, useState } from 'react';
 // import { useRouter } from 'next/navigation';
 
+// // --- Interfaces ---
 // interface ProctoringLog {
 //   type: string;
 //   timestamp: string;
@@ -23,6 +29,51 @@
 //   testId: { title: string };
 // }
 
+// // --- SVG Icons ---
+// const CheckCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mx-auto text-green-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
+// const AlertTriangleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 mr-3 text-yellow-400"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>;
+// const XCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 mr-3 text-red-400"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>;
+
+// // --- Score Circular Progress Component ---
+// const ScoreCircle = ({ percentage }: { percentage: number }) => {
+//     const sqSize = 120;
+//     const strokeWidth = 10;
+//     const radius = (sqSize - strokeWidth) / 2;
+//     const viewBox = `0 0 ${sqSize} ${sqSize}`;
+//     const dashArray = radius * Math.PI * 2;
+//     const dashOffset = dashArray - (dashArray * percentage) / 100;
+
+//     let strokeColor = "#10B981"; // Green
+//     if (percentage < 75) strokeColor = "#F59E0B"; // Yellow
+//     if (percentage < 50) strokeColor = "#EF4444"; // Red
+
+//     return (
+//         <div className="relative w-32 h-32 flex items-center justify-center">
+//              <svg width={sqSize} height={sqSize} viewBox={viewBox}>
+//                 <circle className="text-gray-700" cx={sqSize / 2} cy={sqSize / 2} r={radius} strokeWidth={`${strokeWidth}px`} stroke="currentColor" fill="none" />
+//                 <circle
+//                     className="transition-all duration-1000 ease-in-out"
+//                     cx={sqSize / 2}
+//                     cy={sqSize / 2}
+//                     r={radius}
+//                     strokeWidth={`${strokeWidth}px`}
+//                     transform={`rotate(-90 ${sqSize / 2} ${sqSize / 2})`}
+//                     style={{
+//                         strokeDasharray: dashArray,
+//                         strokeDashoffset: dashOffset,
+//                         stroke: strokeColor,
+//                     }}
+//                     strokeLinecap="round"
+//                     fill="none"
+//                 />
+//             </svg>
+//             <span className="absolute text-3xl font-bold" style={{ color: strokeColor }}>
+//                 {percentage}%
+//             </span>
+//         </div>
+//     );
+// };
+
 // export default function ResultPage({ params }: { params: { attemptId: string } }) {
 //   const router = useRouter();
 //   const attemptId = params.attemptId;
@@ -30,6 +81,7 @@
 //   const [result, setResult] = useState<Result | null>(null);
 //   const [loading, setLoading] = useState(true);
 
+//   // --- All original logic is preserved ---
 //   useEffect(() => {
 //     if (!attemptId) return;
 //     const fetchResult = async () => {
@@ -53,86 +105,81 @@
 //   const formatLogMessage = (logType: string) => {
 //     switch (logType) {
 //       case 'tab_switch':
-//         return { message: 'Navigated away from the test tab.', level: 'Suspicious' };
+//         return { message: 'Navigated away from the test tab.', level: 'Suspicious', icon: AlertTriangleIcon };
 //       case 'no_face_detected':
-//         return { message: 'User was not detected in the camera frame.', level: 'Fatal' };
+//         return { message: 'User was not detected in the camera frame.', level: 'Fatal', icon: XCircleIcon };
 //       case 'multiple_faces_detected':
-//         return { message: 'Multiple people were detected in the camera frame.', level: 'Fatal' };
+//         return { message: 'Multiple people were detected in the camera frame.', level: 'Fatal', icon: XCircleIcon };
 //       case 'voice_activity_detected':
-//         return { message: 'Voice or speech was detected during the test.', level: 'Fatal' };
+//         return { message: 'Voice or speech was detected during the test.', level: 'Fatal', icon: XCircleIcon };
 //       default:
-//         return { message: 'An unknown event was logged.', level: 'Info' };
+//         return { message: 'An unknown event was logged.', level: 'Info', icon: () => null };
 //     }
 //   };
 
-//   if (loading) return <div className="text-center p-10">Loading Your Results...</div>;
-//   if (!result) return <div className="text-center p-10">Results not found.</div>;
+//   if (loading) return <div className="flex justify-center items-center min-h-screen bg-gray-900 text-cyan-300 text-xl animate-pulse">Loading Your Results...</div>;
+//   if (!result) return <div className="flex flex-col justify-center items-center min-h-screen bg-gray-900 text-red-400 p-4"><p className="text-xl font-bold">Results Not Found</p><button onClick={() => router.push('/student')} className="mt-4 px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500">Back to Dashboard</button></div>;
 
 //   const percentage = Math.round((result.score / result.totalMarks) * 100);
 
 //   return (
-//     <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
+//     <div className="min-h-screen bg-gray-900 font-sans text-white p-4 sm:p-8 bg-gradient-to-br from-gray-900 via-black to-gray-900">
 //       <div className="max-w-4xl mx-auto">
-//         <div className="bg-white p-8 rounded-xl shadow-lg text-center mb-8">
-//           <h1 className="text-2xl font-bold text-gray-700">Test Completed!</h1>
-//           <h2 className="text-xl text-gray-600 mt-2 mb-6">Results for: {result.testId.title}</h2>
-//           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-//             <div>
-//               <p className="text-lg font-semibold text-gray-500">Score</p>
-//               <p className="text-4xl font-bold text-blue-600">{result.score} / {result.totalMarks}</p>
+//         <div className="bg-black/50 border border-cyan-800/50 rounded-2xl shadow-2xl shadow-black/40 p-8 backdrop-blur-xl text-center mb-8">
+//           <h1 className="text-3xl font-extrabold text-white tracking-tight">Test Completed!</h1>
+//           <h2 className="text-xl text-cyan-400 mt-2 mb-8">Results for: {result.testId.title}</h2>
+          
+//           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+//             <div className="flex flex-col items-center justify-center">
+//               <p className="text-lg font-semibold text-gray-400">Final Score</p>
+//               <p className="text-5xl font-bold text-white mt-2">{result.score}<span className="text-3xl text-gray-500">/{result.totalMarks}</span></p>
 //             </div>
-//             <div>
-//               <p className="text-lg font-semibold text-gray-500">Percentage</p>
-//               <p className="text-4xl font-bold text-green-600">{percentage}%</p>
+            
+//             <div className="flex items-center justify-center">
+//                 <ScoreCircle percentage={percentage} />
 //             </div>
-//             <div>
-//               <p className="text-lg font-semibold text-gray-500">Suspicion Score</p>
-//               <p className="text-4xl font-bold text-yellow-600">{result.suspicionScore} / 20</p>
+
+//             <div className="flex flex-col items-center justify-center">
+//               <p className="text-lg font-semibold text-gray-400">Suspicion Score</p>
+//               <p className="text-5xl font-bold text-yellow-400 mt-2">{result.suspicionScore}<span className="text-3xl text-gray-500">/20</span></p>
 //             </div>
 //           </div>
 //         </div>
 
-//         <div className="bg-white p-8 rounded-xl shadow-lg">
-//           <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Proctoring Report</h2>
-//           <p className="mb-6 text-gray-600">
-//             This is a log of all events recorded during your test session. 
-//             <span className="font-semibold"> Fatal Strikes: {result.fatalStrikes} / 3</span>
-//           </p>
+//         <div className="bg-black/50 border border-gray-800 rounded-2xl shadow-2xl p-8">
+//           <h2 className="text-2xl font-bold text-white mb-2">Proctoring Report</h2>
+//            <p className="mb-6 text-gray-400">
+//              This is a log of all events recorded during your test session. 
+//              <span className="font-semibold text-red-400"> Fatal Strikes: {result.fatalStrikes} / 3</span>
+//            </p>
 
 //           {result.proctoringLogs.length === 0 ? (
-//             <p className="text-green-600 font-semibold">No suspicious activity was detected. Great job!</p>
+//             <div className="text-center py-12">
+//                 <CheckCircleIcon />
+//                 <p className="text-green-400 font-semibold mt-4 text-lg">No suspicious activity was detected. Great job!</p>
+//             </div>
 //           ) : (
 //             <div className="space-y-4">
 //               {result.proctoringLogs.map((log) => {
-//                 const { message, level } = formatLogMessage(log.type);
+//                 const { message, level, icon: LogIcon } = formatLogMessage(log.type);
 //                 const isFatal = level === 'Fatal';
 //                 const isSuspicious = level === 'Suspicious';
 //                 return (
-//                   <div
-//                     key={log._id}
-//                     className={`p-4 rounded-lg border-l-4 ${
-//                       isFatal
-//                         ? 'bg-red-50 border-red-500'
-//                         : isSuspicious
-//                         ? 'bg-yellow-50 border-yellow-500'
-//                         : 'bg-gray-50 border-gray-400'
-//                     }`}
-//                   >
-//                     <div className="flex justify-between items-center">
-//                       <div>
-//                         <p
-//                           className={`font-semibold ${
-//                             isFatal ? 'text-red-700' : isSuspicious ? 'text-yellow-700' : 'text-gray-700'
-//                           }`}
-//                         >
-//                           {level} Event Detected
-//                         </p>
-//                         <p className="text-gray-800">{message}</p>
-//                       </div>
-//                       <p className="text-sm text-gray-500">
-//                         {new Date(log.timestamp).toLocaleTimeString()}
-//                       </p>
+//                   <div key={log._id} className={`bg-gray-900/70 p-4 rounded-lg border-l-4 flex justify-between items-center ${
+//                       isFatal ? 'border-red-500' : isSuspicious ? 'border-yellow-500' : 'border-gray-600'
+//                   }`}>
+//                     <div className="flex items-center">
+//                         <LogIcon />
+//                         <div>
+//                             <p className={`font-semibold ${
+//                                 isFatal ? 'text-red-400' : isSuspicious ? 'text-yellow-400' : 'text-gray-300'
+//                             }`}>{level} Event</p>
+//                             <p className="text-gray-300">{message}</p>
+//                         </div>
 //                     </div>
+//                     <p className="text-sm text-gray-500 font-mono">
+//                       {new Date(log.timestamp).toLocaleTimeString()}
+//                     </p>
 //                   </div>
 //                 );
 //               })}
@@ -142,8 +189,8 @@
 
 //         <div className="text-center mt-8">
 //           <button
-//             onClick={() => router.push('/dashboard/student')}
-//             className="bg-blue-600 text-white py-3 px-12 rounded-lg hover:bg-blue-700 transition"
+//             onClick={() => router.push('/student')}
+//             className="bg-cyan-600 text-white py-3 px-12 rounded-lg font-semibold hover:bg-cyan-500 transition-all transform hover:scale-105"
 //           >
 //             Back to Dashboard
 //           </button>
@@ -157,17 +204,12 @@
 
 
 
-
-
-
-
-
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-// --- Interfaces ---
+// --- Interfaces (Untouched) ---
 interface ProctoringLog {
   type: string;
   timestamp: string;
@@ -184,28 +226,30 @@ interface Result {
   testId: { title: string };
 }
 
-// --- SVG Icons ---
-const CheckCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mx-auto text-green-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
-const AlertTriangleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 mr-3 text-yellow-400"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>;
-const XCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 mr-3 text-red-400"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>;
+// --- SVG Icons (Untouched) ---
+const CheckCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mx-auto text-green-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
+const AlertTriangleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-yellow-400"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>;
+const XCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-red-400"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>;
+const ShieldCheckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-16 h-16 mx-auto text-green-500"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>;
 
-// --- Score Circular Progress Component ---
+
+// --- Score Circular Progress Component (Untouched Logic) ---
 const ScoreCircle = ({ percentage }: { percentage: number }) => {
-    const sqSize = 120;
-    const strokeWidth = 10;
+    const sqSize = 140;
+    const strokeWidth = 12;
     const radius = (sqSize - strokeWidth) / 2;
     const viewBox = `0 0 ${sqSize} ${sqSize}`;
     const dashArray = radius * Math.PI * 2;
     const dashOffset = dashArray - (dashArray * percentage) / 100;
 
-    let strokeColor = "#10B981"; // Green
-    if (percentage < 75) strokeColor = "#F59E0B"; // Yellow
-    if (percentage < 50) strokeColor = "#EF4444"; // Red
+    let strokeColor = "#22c55e"; // green-500
+    if (percentage < 75) strokeColor = "#f59e0b"; // amber-500
+    if (percentage < 50) strokeColor = "#ef4444"; // red-500
 
     return (
-        <div className="relative w-32 h-32 flex items-center justify-center">
+        <div className="relative" style={{ width: sqSize, height: sqSize }}>
              <svg width={sqSize} height={sqSize} viewBox={viewBox}>
-                <circle className="text-gray-700" cx={sqSize / 2} cy={sqSize / 2} r={radius} strokeWidth={`${strokeWidth}px`} stroke="currentColor" fill="none" />
+                <circle className="text-gray-700/50" cx={sqSize / 2} cy={sqSize / 2} r={radius} strokeWidth={`${strokeWidth}px`} stroke="currentColor" fill="none" />
                 <circle
                     className="transition-all duration-1000 ease-in-out"
                     cx={sqSize / 2}
@@ -222,12 +266,32 @@ const ScoreCircle = ({ percentage }: { percentage: number }) => {
                     fill="none"
                 />
             </svg>
-            <span className="absolute text-3xl font-bold" style={{ color: strokeColor }}>
-                {percentage}%
-            </span>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-4xl font-bold" style={{ color: strokeColor }}>
+                    {percentage}
+                </span>
+                <span className="text-sm text-gray-400 -mt-1">%</span>
+            </div>
         </div>
     );
 };
+
+// --- Global Styles Component ---
+const GlobalStyles = () => (
+    <style jsx global>{`
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes backgroundPan { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+        .bg-sentinel-animated {
+            background: linear-gradient(90deg, #020617, #082f49, #020617);
+            background-size: 200% 200%;
+            animation: backgroundPan 15s ease infinite;
+        }
+    `}</style>
+);
+
 
 export default function ResultPage({ params }: { params: { attemptId: string } }) {
   const router = useRouter();
@@ -272,86 +336,94 @@ export default function ResultPage({ params }: { params: { attemptId: string } }
     }
   };
 
-  if (loading) return <div className="flex justify-center items-center min-h-screen bg-gray-900 text-cyan-300 text-xl animate-pulse">Loading Your Results...</div>;
+  if (loading) return <div className="flex flex-col justify-center items-center min-h-screen bg-gray-900 text-cyan-300 text-xl"><div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div><p className="mt-4">Loading Your Results...</p></div>;
   if (!result) return <div className="flex flex-col justify-center items-center min-h-screen bg-gray-900 text-red-400 p-4"><p className="text-xl font-bold">Results Not Found</p><button onClick={() => router.push('/student')} className="mt-4 px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500">Back to Dashboard</button></div>;
 
   const percentage = Math.round((result.score / result.totalMarks) * 100);
 
   return (
-    <div className="min-h-screen bg-gray-900 font-sans text-white p-4 sm:p-8 bg-gradient-to-br from-gray-900 via-black to-gray-900">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-black/50 border border-cyan-800/50 rounded-2xl shadow-2xl shadow-black/40 p-8 backdrop-blur-xl text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-white tracking-tight">Test Completed!</h1>
-          <h2 className="text-xl text-cyan-400 mt-2 mb-8">Results for: {result.testId.title}</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-            <div className="flex flex-col items-center justify-center">
-              <p className="text-lg font-semibold text-gray-400">Final Score</p>
-              <p className="text-5xl font-bold text-white mt-2">{result.score}<span className="text-3xl text-gray-500">/{result.totalMarks}</span></p>
-            </div>
-            
-            <div className="flex items-center justify-center">
-                <ScoreCircle percentage={percentage} />
+    <>
+        <GlobalStyles />
+        <div className="min-h-screen bg-sentinel-animated font-sans text-white p-4 sm:p-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-black/70 border border-cyan-800/50 rounded-2xl shadow-2xl shadow-cyan-500/10 p-8 backdrop-blur-xl text-center mb-8 animate-fadeInUp" style={{ animationDelay: '100ms' }}>
+              <h1 className="text-3xl font-extrabold text-white tracking-tight">Test Completed!</h1>
+              <h2 className="text-xl text-cyan-400 mt-2 mb-8">Results for: {result.testId.title}</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <div className="flex flex-col items-center justify-center bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+                  <p className="text-lg font-semibold text-gray-400">Final Score</p>
+                  <p className="text-5xl font-bold text-white mt-2">{result.score}<span className="text-3xl text-gray-500">/{result.totalMarks}</span></p>
+                </div>
+                
+                <div className="flex items-center justify-center">
+                    <ScoreCircle percentage={percentage} />
+                </div>
+
+                <div className="flex flex-col items-center justify-center bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+                  <p className="text-lg font-semibold text-gray-400">Suspicion Score</p>
+                  <p className="text-5xl font-bold text-yellow-400 mt-2">{result.suspicionScore}<span className="text-3xl text-gray-500">/20</span></p>
+                </div>
+              </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center">
-              <p className="text-lg font-semibold text-gray-400">Suspicion Score</p>
-              <p className="text-5xl font-bold text-yellow-400 mt-2">{result.suspicionScore}<span className="text-3xl text-gray-500">/20</span></p>
+            <div className="bg-black/70 border border-gray-800 rounded-2xl shadow-2xl p-8 backdrop-blur-xl animate-fadeInUp" style={{ animationDelay: '300ms' }}>
+              <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold text-white">Proctoring Report</h2>
+                  <p className="text-sm font-semibold bg-red-900/50 text-red-400 border border-red-700/50 px-3 py-1 rounded-full">
+                    Fatal Strikes: {result.fatalStrikes} / 3
+                  </p>
+              </div>
+
+              {result.proctoringLogs.length === 0 ? (
+                <div className="text-center py-12">
+                    <ShieldCheckIcon />
+                    <p className="text-green-400 font-semibold mt-4 text-lg">System Integrity Nominal</p>
+                    <p className="text-gray-400 text-sm">No suspicious activity was detected during the session.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {result.proctoringLogs.map((log) => {
+                    const { message, level, icon: LogIcon } = formatLogMessage(log.type);
+                    const isFatal = level === 'Fatal';
+                    const isSuspicious = level === 'Suspicious';
+                    return (
+                      <div key={log._id} className={`bg-gray-900/70 p-4 rounded-lg border-l-4 flex justify-between items-center transition-all hover:bg-gray-800/50 ${
+                          isFatal ? 'border-red-500' : isSuspicious ? 'border-yellow-500' : 'border-gray-600'
+                      }`}>
+                        <div className="flex items-center">
+                            <div className={`mr-4 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center ${
+                                isFatal ? 'bg-red-500/10' : 'bg-yellow-500/10'
+                            }`}>
+                                <LogIcon />
+                            </div>
+                            <div>
+                                <p className={`font-semibold ${
+                                    isFatal ? 'text-red-400' : isSuspicious ? 'text-yellow-400' : 'text-gray-300'
+                                }`}>{level} Event</p>
+                                <p className="text-gray-300">{message}</p>
+                            </div>
+                        </div>
+                        <p className="text-sm text-gray-500 font-mono">
+                          {new Date(log.timestamp).toLocaleTimeString()}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            <div className="text-center mt-8 animate-fadeInUp" style={{ animationDelay: '500ms' }}>
+              <button
+                onClick={() => router.push('/student')}
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 px-12 rounded-lg font-bold hover:from-cyan-400 hover:to-blue-500 transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20"
+              >
+                Back to Dashboard
+              </button>
             </div>
           </div>
         </div>
-
-        <div className="bg-black/50 border border-gray-800 rounded-2xl shadow-2xl p-8">
-          <h2 className="text-2xl font-bold text-white mb-2">Proctoring Report</h2>
-           <p className="mb-6 text-gray-400">
-             This is a log of all events recorded during your test session. 
-             <span className="font-semibold text-red-400"> Fatal Strikes: {result.fatalStrikes} / 3</span>
-           </p>
-
-          {result.proctoringLogs.length === 0 ? (
-            <div className="text-center py-12">
-                <CheckCircleIcon />
-                <p className="text-green-400 font-semibold mt-4 text-lg">No suspicious activity was detected. Great job!</p>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {result.proctoringLogs.map((log) => {
-                const { message, level, icon: LogIcon } = formatLogMessage(log.type);
-                const isFatal = level === 'Fatal';
-                const isSuspicious = level === 'Suspicious';
-                return (
-                  <div key={log._id} className={`bg-gray-900/70 p-4 rounded-lg border-l-4 flex justify-between items-center ${
-                      isFatal ? 'border-red-500' : isSuspicious ? 'border-yellow-500' : 'border-gray-600'
-                  }`}>
-                    <div className="flex items-center">
-                        <LogIcon />
-                        <div>
-                            <p className={`font-semibold ${
-                                isFatal ? 'text-red-400' : isSuspicious ? 'text-yellow-400' : 'text-gray-300'
-                            }`}>{level} Event</p>
-                            <p className="text-gray-300">{message}</p>
-                        </div>
-                    </div>
-                    <p className="text-sm text-gray-500 font-mono">
-                      {new Date(log.timestamp).toLocaleTimeString()}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        <div className="text-center mt-8">
-          <button
-            onClick={() => router.push('/student')}
-            className="bg-cyan-600 text-white py-3 px-12 rounded-lg font-semibold hover:bg-cyan-500 transition-all transform hover:scale-105"
-          >
-            Back to Dashboard
-          </button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
-
