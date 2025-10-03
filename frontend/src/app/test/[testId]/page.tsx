@@ -160,7 +160,7 @@ export default function TestPage() {
             console.log('Connected to socket server!');
             socket.emit('join_attempt_room', attemptId);
         });
-        socket.on('fatal_strike_warning', (data) => setWarning({ title: `Fatal Warning (${data.strikes}/4)`, message: data.message }));
+        socket.on('fatal_strike_warning', (data) => setWarning({ title: `Fatal Warning (${data.strikes}/5)`, message: data.message }));
         socket.on('suspicion_score_warning', (data) => setWarning({ title: `Suspicion Score: ${data.score}/20`, message: data.message }));
         socket.on('force_submit', (data) => {
             setWarning({ title: 'Test Terminated', message: data.message });
@@ -230,7 +230,7 @@ export default function TestPage() {
         return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     };
 
-    // --- FROM HERE DOWN, ONLY STYLING AND JSX STRUCTURE HAS BEEN MODIFIED ---
+
 
     const renderWarningPopup = () => {
         if (!warning) return null;
@@ -367,7 +367,7 @@ export default function TestPage() {
                             </div>
                         </div>
                         
-                        {/* --- NEW: Question Navigator --- */}
+                        
                         <div className="flex-grow my-4 overflow-y-auto question-navigator pr-2">
                              <h3 className="text-sm font-semibold text-gray-400 mb-3 tracking-wider">Navigator</h3>
                              <div className="grid grid-cols-5 gap-2">

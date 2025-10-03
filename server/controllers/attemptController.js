@@ -56,9 +56,9 @@ export const logViolation = async (req, res) => {
       attempt.fatalStrikes += 1;
       io.to(attemptId).emit('fatal_strike_warning', {
         strikes: attempt.fatalStrikes,
-        message: `Fatal Warning ${attempt.fatalStrikes}/4: A serious violation was detected. (${violationType})`
+        message: `Fatal Warning ${attempt.fatalStrikes}/5: A serious violation was detected. (${violationType})`
       });
-      if (attempt.fatalStrikes >= 4) {
+      if (attempt.fatalStrikes >= 6) {
         io.to(attemptId).emit('force_submit', {
           message: 'Test terminated due to multiple serious violations.'
         });

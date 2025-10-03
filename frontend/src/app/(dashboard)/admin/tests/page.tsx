@@ -365,8 +365,8 @@ const Sidebar = ({ onNavigate, activeView }: { onNavigate: (path: string) => voi
     const navItems = [
         { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboardIcon, path: '/admin' },
         { id: 'tests', label: 'Tests', icon: FileJsonIcon, path: '/admin/tests' },
-        { id: 'users', label: 'Users', icon: UsersIcon, path: '/admin/users' },
-        { id: 'settings', label: 'Settings', icon: SettingsIcon, path: '/admin/settings' },
+        { id: 'attempts', label: 'Attempts', icon: UsersIcon, path: '/admin/attempts' },
+        { id: 'settings', label: 'Manage Tests', icon: SettingsIcon, path: '/admin/settings' },
     ];
 
     return (

@@ -80,178 +80,220 @@
 
 
 
+
+
+
+
+
 'use client';
 
-import { motion, Variants } from 'framer-motion';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState, FormEvent } from 'react';
 
-// --- SVG Icon Components ---
-const EyeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 mb-4 text-blue-400"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-);
-const ShieldCheckIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 mb-4 text-blue-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
-);
-const BarChartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 mb-4 text-blue-400"><line x1="12" x2="12" y1="20" y2="10"></line><line x1="18" x2="18" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="16"></line></svg>
+// --- ICONS ---
+const SpinnerIcon = () => (
+  <svg
+    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <circle
+      className="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      strokeWidth="4"
+    />
+    <path
+      className="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 
+         5.373 0 12h4zm2 5.291A7.962 
+         7.962 0 014 12H0c0 3.042 
+         1.135 5.824 3 7.938l3-2.647z"
+    />
+  </svg>
 );
 
-export default function HomePage() {
+const AtSymbolIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-5 w-5 text-gray-400"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M16 12a4 4 0 10-8 0 
+         4 4 0 008 0zm0 0v1.5a2.5 
+         2.5 0 005 0V12a9 9 0 
+         10-9 9m4.5-1.206a8.959 
+         8.959 0 01-4.5 1.206"
+    />
+  </svg>
+);
+
+const LockIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-5 w-5 text-gray-400"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 15v2m-6 4h12a2 
+         2 0 002-2v-6a2 2 0 
+         00-2-2H6a2 2 0 00-2 
+         2v6a2 2 0 002 2zm10-10V7a4 
+         4 0 00-8 0v4h8z"
+    />
+  </svg>
+);
+
+export default function SignupPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Signup failed');
+
+      localStorage.setItem('token', data.token);
+      router.push('/student'); 
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-200 font-sans">
-      <Navbar />
-      <HeroSection />
-      <FeaturesSection />
-      <Footer />
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-900 p-6">
+      <div className="w-full max-w-md">
+        <div className="bg-black/70 border border-cyan-800 rounded-3xl shadow-2xl p-8 backdrop-blur-lg">
+          
+          {/* HEADER */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-extrabold text-white tracking-tight flex items-center justify-center space-x-2">
+              <span className="bg-cyan-500 w-3 h-3 rounded-full inline-block animate-pulse"></span>
+              <span>Sentinel.ai</span>
+            </h1>
+            <p className="text-gray-400 mt-2 text-sm">
+              Create your account
+            </p>
+          </div>
+
+          {/* FORM */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Email */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                Email Address
+              </label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <AtSymbolIcon />
+                </span>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-10 bg-gray-900/70 border border-gray-700 text-gray-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+                Password
+              </label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <LockIcon />
+                </span>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 bg-gray-900/70 border border-gray-700 text-gray-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Error */}
+            {error && (
+              <div className="bg-red-900/40 border border-red-800 text-red-300 px-4 py-3 rounded-lg text-sm">
+                <p><span className="font-semibold">Signup Failed:</span> {error}</p>
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full flex items-center justify-center bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+            >
+              {isLoading && <SpinnerIcon />}
+              {isLoading ? 'Signing Up...' : 'Sign Up'}
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="flex items-center gap-4 my-6">
+            <div className="flex-1 h-px bg-gray-700" />
+            <span className="text-gray-500 text-sm">or</span>
+            <div className="flex-1 h-px bg-gray-700" />
+          </div>
+
+          {/* Login Link */}
+          <p className="text-center text-sm text-gray-400">
+            Already have an account?{' '}
+            <button
+              onClick={() => router.push('/auth/login')}
+              className="text-cyan-400 hover:text-cyan-300 font-semibold transition"
+            >
+              Sign In
+            </button>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
 
-const Navbar = () => {
-  return (
-    <motion.nav 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 bg-gray-950/50 backdrop-blur-lg"
-    >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-white">
-          Sentinel.ai
-        </Link>
-        <div className="flex items-center gap-4">
-          <Link href="/auth/login" className="text-gray-300 hover:text-white transition-colors">
-            Login
-          </Link>
-          <Link href="/auth/signup" className="bg-blue-600 text-white py-2 px-5 rounded-lg hover:bg-blue-700 transition-colors">
-            Sign Up
-          </Link>
-        </div>
-      </div>
-    </motion.nav>
-  );
-};
 
-const HeroSection = () => {
-  const title = "Ensuring Academic Integrity with Intelligent AI Proctoring";
 
-  const titleVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.05 } }
-  };
 
-  const letterVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
 
-  return (
-    <section className="h-screen flex items-center justify-center text-center bg-grid-pattern pt-28 px-6 sm:px-8 md:px-12">
-      <div className="max-w-7xl mx-auto">
-        <motion.h1 
-          variants={titleVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-extrabold text-white mb-6 leading-tight"
-        >
-          {title.split(" ").map((word, wordIndex) => (
-            <span key={wordIndex} className="inline-block mr-3">
-              {word.split("").map((letter, letterIndex) => (
-                <motion.span key={letterIndex} variants={letterVariants} className="inline-block">
-                  {letter}
-                </motion.span>
-              ))}
-            </span>
-          ))}
-        </motion.h1>
 
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.5 }}
-          className="text-lg md:text-xl text-gray-400 mb-10 max-w-4xl mx-auto"
-        >
-          Our cutting-edge platform provides unbiased, secure, and scalable online examination monitoring to uphold the standard of your assessments.
-        </motion.p>
-        
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 2 }}
-        >
-          <Link href="/auth/login" className="bg-blue-600 text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-blue-700 transition-transform hover:scale-105">
-            Get Started
-          </Link>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
 
-const FeaturesSection = () => {
-  const features = [
-    { icon: <EyeIcon />, title: "AI-Powered Monitoring", description: "Real-time analysis of video and audio feeds to detect violations like multiple faces, unauthorized voices, and tab switching." },
-    { icon: <ShieldCheckIcon />, title: "Two-Tiered Security", description: "A unique system of 'Fatal Strikes' for major violations and a 'Suspicion Score' for minor infractions ensures fair and robust proctoring." },
-    { icon: <BarChartIcon />, title: "Actionable Insights", description: "Receive detailed, timestamped reports for every test attempt, providing transparent and undeniable evidence of any misconduct." }
-  ];
-
-  const containerVariants: Variants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.2 } }
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" }}
-  };
-
-  return (
-    <section className="py-24 bg-gray-950">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">The Future of Fair Assessments</h2>
-        <p className="text-lg text-gray-400 mb-16 max-w-4xl mx-auto">Our platform is built on three core principles to provide the most reliable online proctoring solution.</p>
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-10"
-        >
-          {features.map((feature, index) => (
-            <motion.div key={index} variants={itemVariants} className="bg-gray-900 p-10 rounded-xl border border-gray-800 hover:border-blue-500 transition-colors">
-              {feature.icon}
-              <h3 className="text-2xl font-bold text-white mb-3">{feature.title}</h3>
-              <p className="text-gray-400">{feature.description}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-const Footer = () => {
-  return (
-    <footer className="py-8 bg-gray-950 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto text-center text-gray-500">
-        <p>&copy; {new Date().getFullYear()} Sentinel.ai. All Rights Reserved.</p>
-      </div>
-    </footer>
-  );
-};
-
-const style = `
-  .bg-grid-pattern {
-    background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-`;
-
-if (typeof window !== 'undefined') {
-  const styleSheet = document.createElement("style");
-  styleSheet.type = "text/css";
-  styleSheet.innerText = style;
-  document.head.appendChild(styleSheet);
-}

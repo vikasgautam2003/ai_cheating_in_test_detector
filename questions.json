@@ -1,0 +1,277 @@
+[
+  {
+    "questionText": "What is the capital of France?",
+    "options": ["Paris", "London", "Berlin", "Madrid"],
+    "correctAnswer": "Paris"
+  },
+  {
+    "questionText": "Which planet is known as the Red Planet?",
+    "options": ["Earth", "Mars", "Venus", "Jupiter"],
+    "correctAnswer": "Mars"
+  },
+  {
+    "questionText": "Who wrote the play 'Romeo and Juliet'?",
+    "options": ["William Shakespeare", "Charles Dickens", "Mark Twain", "Jane Austen"],
+    "correctAnswer": "William Shakespeare"
+  },
+  {
+    "questionText": "What is the largest mammal in the world?",
+    "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],
+    "correctAnswer": "Blue Whale"
+  },
+  {
+    "questionText": "Which gas do plants absorb from the atmosphere?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Helium"],
+    "correctAnswer": "Carbon Dioxide"
+  },
+  {
+    "questionText": "What is the boiling point of water at sea level?",
+    "options": ["90°C", "100°C", "110°C", "120°C"],
+    "correctAnswer": "100°C"
+  },
+  {
+    "questionText": "Which country hosted the 2016 Summer Olympics?",
+    "options": ["China", "Brazil", "UK", "Russia"],
+    "correctAnswer": "Brazil"
+  },
+  {
+    "questionText": "What is the hardest natural substance on Earth?",
+    "options": ["Gold", "Iron", "Diamond", "Platinum"],
+    "correctAnswer": "Diamond"
+  },
+  {
+    "questionText": "Who invented the telephone?",
+    "options": ["Alexander Graham Bell", "Thomas Edison", "Nikola Tesla", "Albert Einstein"],
+    "correctAnswer": "Alexander Graham Bell"
+  },
+  {
+    "questionText": "What is the smallest prime number?",
+    "options": ["0", "1", "2", "3"],
+    "correctAnswer": "2"
+  },
+  {
+    "questionText": "Which ocean is the largest?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "correctAnswer": "Pacific"
+  },
+  {
+    "questionText": "What is the main ingredient in guacamole?",
+    "options": ["Avocado", "Tomato", "Onion", "Cucumber"],
+    "correctAnswer": "Avocado"
+  },
+  {
+    "questionText": "Which is the tallest mountain in the world?",
+    "options": ["K2", "Mount Everest", "Kangchenjunga", "Lhotse"],
+    "correctAnswer": "Mount Everest"
+  },
+  {
+    "questionText": "What currency is used in Japan?",
+    "options": ["Yen", "Dollar", "Euro", "Won"],
+    "correctAnswer": "Yen"
+  },
+  {
+    "questionText": "Which element has the chemical symbol 'O'?",
+    "options": ["Osmium", "Oxygen", "Gold", "Silver"],
+    "correctAnswer": "Oxygen"
+  },
+  {
+    "questionText": "Which continent is known as the 'Dark Continent'?",
+    "options": ["Africa", "Asia", "Europe", "Australia"],
+    "correctAnswer": "Africa"
+  },
+  {
+    "questionText": "Who painted the Mona Lisa?",
+    "options": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"],
+    "correctAnswer": "Leonardo da Vinci"
+  },
+  {
+    "questionText": "How many continents are there?",
+    "options": ["5", "6", "7", "8"],
+    "correctAnswer": "7"
+  },
+  {
+    "questionText": "Which language is the most spoken in the world?",
+    "options": ["English", "Mandarin Chinese", "Spanish", "Hindi"],
+    "correctAnswer": "Mandarin Chinese"
+  },
+  {
+    "questionText": "What is the chemical formula of water?",
+    "options": ["H2O", "CO2", "NaCl", "O2"],
+    "correctAnswer": "H2O"
+  },
+  {
+    "questionText": "Which is the fastest land animal?",
+    "options": ["Cheetah", "Lion", "Tiger", "Horse"],
+    "correctAnswer": "Cheetah"
+  },
+  {
+    "questionText": "Which planet has the most moons?",
+    "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+    "correctAnswer": "Saturn"
+  },
+  {
+    "questionText": "Who discovered gravity?",
+    "options": ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Nikola Tesla"],
+    "correctAnswer": "Isaac Newton"
+  },
+  {
+    "questionText": "What is the largest country by area?",
+    "options": ["Canada", "China", "Russia", "USA"],
+    "correctAnswer": "Russia"
+  },
+  {
+    "questionText": "Which blood type is known as the universal donor?",
+    "options": ["O+", "O-", "AB+", "AB-"],
+    "correctAnswer": "O-"
+  },
+  {
+    "questionText": "What year did the Titanic sink?",
+    "options": ["1905", "1912", "1920", "1898"],
+    "correctAnswer": "1912"
+  },
+  {
+    "questionText": "What is the tallest building in the world as of 2025?",
+    "options": ["Shanghai Tower", "Burj Khalifa", "One World Trade Center", "Petronas Towers"],
+    "correctAnswer": "Burj Khalifa"
+  },
+  {
+    "questionText": "Which animal is known as the ship of the desert?",
+    "options": ["Horse", "Camel", "Elephant", "Donkey"],
+    "correctAnswer": "Camel"
+  },
+  {
+    "questionText": "What is the largest organ in the human body?",
+    "options": ["Liver", "Skin", "Heart", "Lungs"],
+    "correctAnswer": "Skin"
+  },
+  {
+    "questionText": "Which vitamin is produced when a person is exposed to sunlight?",
+    "options": ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"],
+    "correctAnswer": "Vitamin D"
+  },
+  {
+    "questionText": "Which city is known as the Big Apple?",
+    "options": ["Los Angeles", "Chicago", "New York City", "San Francisco"],
+    "correctAnswer": "New York City"
+  },
+  {
+    "questionText": "Which country invented paper?",
+    "options": ["Egypt", "China", "Greece", "India"],
+    "correctAnswer": "China"
+  },
+  {
+    "questionText": "Which year did World War II end?",
+    "options": ["1942", "1945", "1948", "1950"],
+    "correctAnswer": "1945"
+  },
+  {
+    "questionText": "What is the currency of the UK?",
+    "options": ["Euro", "Pound Sterling", "Dollar", "Franc"],
+    "correctAnswer": "Pound Sterling"
+  },
+  {
+    "questionText": "What is the largest island in the world?",
+    "options": ["Greenland", "Australia", "New Guinea", "Borneo"],
+    "correctAnswer": "Greenland"
+  },
+  {
+    "questionText": "Which organ purifies blood in the human body?",
+    "options": ["Lungs", "Liver", "Kidneys", "Heart"],
+    "correctAnswer": "Kidneys"
+  },
+  {
+    "questionText": "What is the national sport of Japan?",
+    "options": ["Baseball", "Sumo Wrestling", "Karate", "Judo"],
+    "correctAnswer": "Sumo Wrestling"
+  },
+  {
+    "questionText": "Who was the first President of the United States?",
+    "options": ["Thomas Jefferson", "George Washington", "John Adams", "Abraham Lincoln"],
+    "correctAnswer": "George Washington"
+  },
+  {
+    "questionText": "Which sea creature has three hearts?",
+    "options": ["Octopus", "Shark", "Whale", "Dolphin"],
+    "correctAnswer": "Octopus"
+  },
+  {
+    "questionText": "What is the main gas found in the Earth's atmosphere?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Helium"],
+    "correctAnswer": "Nitrogen"
+  },
+  {
+    "questionText": "Which country is known as the Land of the Rising Sun?",
+    "options": ["China", "Japan", "Thailand", "India"],
+    "correctAnswer": "Japan"
+  },
+  {
+    "questionText": "Which is the smallest continent by land area?",
+    "options": ["Australia", "Europe", "Antarctica", "South America"],
+    "correctAnswer": "Australia"
+  },
+  {
+    "questionText": "What is the main ingredient in sushi?",
+    "options": ["Rice", "Fish", "Seaweed", "All of the above"],
+    "correctAnswer": "All of the above"
+  },
+  {
+    "questionText": "Which planet is closest to the Sun?",
+    "options": ["Mercury", "Venus", "Earth", "Mars"],
+    "correctAnswer": "Mercury"
+  },
+  {
+    "questionText": "Who is known as the Father of Computers?",
+    "options": ["Alan Turing", "Charles Babbage", "Bill Gates", "Steve Jobs"],
+    "correctAnswer": "Charles Babbage"
+  },
+  {
+    "questionText": "Which is the longest river in the world?",
+    "options": ["Amazon", "Nile", "Yangtze", "Mississippi"],
+    "correctAnswer": "Nile"
+  },
+  {
+    "questionText": "Which country gifted the Statue of Liberty to the USA?",
+    "options": ["France", "UK", "Spain", "Germany"],
+    "correctAnswer": "France"
+  },
+  {
+    "questionText": "What is the symbol for gold in the periodic table?",
+    "options": ["Au", "Ag", "Gd", "Go"],
+    "correctAnswer": "Au"
+  },
+  {
+    "questionText": "Which is the most spoken language in India?",
+    "options": ["Hindi", "English", "Bengali", "Tamil"],
+    "correctAnswer": "Hindi"
+  },
+  {
+    "questionText": "Which country is known for tulip fields?",
+    "options": ["Netherlands", "France", "Germany", "Italy"],
+    "correctAnswer": "Netherlands"
+  },
+  {
+    "questionText": "Which is the largest desert in the world?",
+    "options": ["Sahara", "Gobi", "Kalahari", "Arabian"],
+    "correctAnswer": "Sahara"
+  },
+  {
+    "questionText": "What does DNA stand for?",
+    "options": ["Deoxyribonucleic Acid", "Deoxyribogen Acid", "Dioxygen Nucleic Acid", "None of the above"],
+    "correctAnswer": "Deoxyribonucleic Acid"
+  },
+  {
+    "questionText": "Which is the fastest bird?",
+    "options": ["Peregrine Falcon", "Eagle", "Sparrow", "Ostrich"],
+    "correctAnswer": "Peregrine Falcon"
+  },
+  {
+    "questionText": "Which organ in the human body produces insulin?",
+    "options": ["Liver", "Pancreas", "Kidney", "Heart"],
+    "correctAnswer": "Pancreas"
+  },
+  {
+    "questionText": "Which country has the most population?",
+    "options": ["India", "China", "USA", "Indonesia"],
+    "correctAnswer": "China"
+  }
+]

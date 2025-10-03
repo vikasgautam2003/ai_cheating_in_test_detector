@@ -394,9 +394,9 @@ export default function CenterVideoSection() {
       ></div>
 
       {/* Headline */}
-      <h1 className="text-[6rem] sm:text-[8rem] font-bold leading-[1.05] tracking-tight overflow-hidden text-center mb-20">
+      <h1 className="text-[6rem] sm:text-[10rem] font-bold leading-[1.05] tracking-tight  text-center mb-20">
         {"Redefining Integrity in the Digital Age.".split(' ').map((word, i) => (
-          <span key={i} className="inline-block pr-4 overflow-hidden">
+          <span key={i} className="inline-block pr-4 ">
             {word.split('').map((char, j) => (
               <span key={j} className="inline-block main-headline-char">{char}</span>
             ))}
