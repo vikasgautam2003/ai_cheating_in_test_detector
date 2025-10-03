@@ -15,6 +15,8 @@ import resultRoutes from './routes/resultRoutes.js';
 import attemptRoutes from './routes/attemptRoutes.js';
 import setupSocket from './socket/index.js';
 import adminRoutes from './routes/adminRoutes.js';
+import studentRoutes from './routes/studentRoutes.js';
+
 
 dotenv.config();
 
@@ -46,6 +48,8 @@ app.use('/api/tests', testRoutes);
 app.use('/api/results', resultRoutes);
 app.use('/api/attempts', attemptRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/student', studentRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
