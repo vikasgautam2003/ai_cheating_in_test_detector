@@ -367,7 +367,7 @@ export default function SettingsPage() {
         setLoading(true);
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:5000/api/admin/tests', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/tests`, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
             if (!res.ok) throw new Error('Failed to fetch tests.');
@@ -392,7 +392,7 @@ export default function SettingsPage() {
         if (!deleteId) return;
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/tests/${deleteId}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/tests/${deleteId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` },
             });

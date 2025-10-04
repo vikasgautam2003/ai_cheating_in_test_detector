@@ -115,8 +115,8 @@ function AdminPage() {
             const token = localStorage.getItem('token');
             try {
                 const [statsRes, activityRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/admin/dashboard-stats', { headers: { 'Authorization': `Bearer ${token}` } }),
-                    fetch('http://localhost:5000/api/admin/recent-activity', { headers: { 'Authorization': `Bearer ${token}` } })
+                    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/dashboard-stats`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/recent-activity`, { headers: { 'Authorization': `Bearer ${token}` } })
                 ]);
                 if (!statsRes.ok) throw new Error('Failed to fetch dashboard stats.');
                 if (!activityRes.ok) throw new Error('Failed to fetch recent activity.');

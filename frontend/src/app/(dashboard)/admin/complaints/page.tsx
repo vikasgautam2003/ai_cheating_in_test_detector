@@ -285,7 +285,7 @@ export default function ComplaintsPage() {
     setLoading(true);
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch('http://localhost:5000/api/admin/complaints', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/complaints`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -307,7 +307,7 @@ export default function ComplaintsPage() {
   const handleUpdateStatus = async (complaintId: string, status: Complaint['status']) => {
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/complaints/${complaintId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/complaints/${complaintId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ status }),

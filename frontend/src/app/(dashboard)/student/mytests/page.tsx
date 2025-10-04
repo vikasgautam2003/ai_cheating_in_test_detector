@@ -93,7 +93,7 @@ export default function MyTestsPage() {
                 return;
             }
             try {
-                const res = await fetch('http://localhost:5000/api/student/my-attempts', {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/student/my-attempts`, {
                     headers: { 'Authorization': `Bearer ${token}` },
                 });
                 if (!res.ok) throw new Error(`Failed to fetch your test history.`);

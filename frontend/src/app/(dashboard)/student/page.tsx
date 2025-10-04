@@ -377,9 +377,9 @@ export default function StudentDashboardPage() {
         try {
             console.log("🚀 Starting parallel fetch requests...");
             const [testsRes, statsRes, attemptsRes] = await Promise.all([
-                fetch('http://localhost:5000/api/tests', { headers }),
-                fetch('http://localhost:5000/api/student/profile-stats', { headers }),
-                fetch('http://localhost:5000/api/student/my-attempts', { headers }),
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tests`, { headers }),
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/student/profile-stats`, { headers }),
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/student/my-attempts`, { headers }),
             ]);
             console.log("✅ All fetch requests completed");
 

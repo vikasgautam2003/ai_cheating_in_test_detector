@@ -83,13 +83,13 @@ export default function TestPage() {
     const [warning, setWarning] = useState<{ title: string; message: string } | null>(null);
     const [attemptId, setAttemptId] = useState<string | null>(null);
 
-    // --- All handler functions and useEffects are UNTOUCHED ---
+  
     const handleSubmission = useCallback(async () => {
         if (!attemptId) { setError("Cannot submit: No attempt ID found."); return; }
         setLoading(true);
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:5000/api/attempts/${attemptId}/submit`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attempts/${attemptId}/submit`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ answers }),
@@ -108,7 +108,7 @@ export default function TestPage() {
             if (!token) { router.push('/login'); return; }
             try {
                 setLoading(true);
-                const response = await fetch(`http://localhost:5000/api/tests/${testId}`, {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tests/${testId}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!response.ok) throw new Error('Failed to load the test.');
@@ -142,7 +142,7 @@ export default function TestPage() {
             if (document.hidden) {
                 console.log("Violation: Tab switch detected, logging...");
                 const token = localStorage.getItem('token');
-                fetch(`http://localhost:5000/api/attempts/${attemptId}/log`, {
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attempts/${attemptId}/log`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify({ violationType: 'tab_switch' }),
@@ -155,7 +155,7 @@ export default function TestPage() {
     
     useEffect(() => {
         if (!attemptId) return;
-        const socket = io('http://localhost:5000', { transports: ['websocket', 'polling'] });
+        const socket = io(`${process.env.NEXT_PUBLIC_API_URL}`, { transports: ['websocket', 'polling'] });
         socket.on('connect', () => {
             console.log('Connected to socket server!');
             socket.emit('join_attempt_room', attemptId);
@@ -176,7 +176,7 @@ export default function TestPage() {
         setLoading(true);
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:5000/api/tests/${testId}/start`, { method: 'POST', headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tests/${testId}/start`, { method: 'POST', headers: { 'Authorization': `Bearer ${token}` } });
             if (!response.ok) throw new Error("Could not start the test session.");
             const data = await response.json();
             setAttemptId(data.attemptId);
@@ -197,12 +197,12 @@ export default function TestPage() {
     const handleFrameAnalysis = async (imageData: string) => {
         if (!attemptId) return;
         try {
-            const aiResponse = await fetch('http://localhost:8000/analyze-video-frame', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image_data: imageData }), });
+            const aiResponse = await fetch(`${process.env.NEXT_PUBLIC_AI_API_URL}/analyze-video-frame`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image_data: imageData }), });
             if (!aiResponse.ok) return;
             const analysisResult = await aiResponse.json();
             if (analysisResult.violation_type) {
                 const token = localStorage.getItem('token');
-                await fetch(`http://localhost:5000/api/attempts/${attemptId}/log`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ violationType: analysisResult.violation_type }), });
+                await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attempts/${attemptId}/log`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ violationType: analysisResult.violation_type }), });
             }
         } catch (error) { console.error(error); }
     };
@@ -210,12 +210,12 @@ export default function TestPage() {
     const handleAudioAnalysis = async (audioData: string) => {
         if (!attemptId) return;
         try {
-            const aiResponse = await fetch('http://localhost:8000/analyze-audio-clip', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ audio_data: audioData }), });
+            const aiResponse = await fetch(`${process.env.NEXT_PUBLIC_AI_API_URL}/analyze-audio-clip`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ audio_data: audioData }), });
             if (!aiResponse.ok) return;
             const result = await aiResponse.json();
             if (result.violation_type) {
                 const token = localStorage.getItem('token');
-                await fetch(`http://localhost:5000/api/attempts/${attemptId}/log`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ violationType: result.violation_type }), });
+                await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attempts/${attemptId}/log`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ violationType: result.violation_type }), });
             }
         } catch (error) { console.error(error); }
     };

@@ -348,7 +348,7 @@ export default function ResultPage({ params }: { params: { attemptId: string } }
     const fetchResult = async () => {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch(`http://localhost:5000/api/results/${attemptId}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/results/${attemptId}`, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
         if (!res.ok) throw new Error('Could not fetch results.');
@@ -369,7 +369,7 @@ export default function ResultPage({ params }: { params: { attemptId: string } }
     setSubmissionStatus('submitting');
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:5000/api/complaints`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/complaints`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
