@@ -25,10 +25,19 @@ dotenv.config();
 const app = express();
 connectDB();
 
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true
-}));
+import cors from "cors";
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",              
+      "https://sentinalai-jade.vercel.app/", 
+    ],
+    credentials: true, // if using cookies/sessions
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,7 +45,10 @@ app.use(express.urlencoded({ extended: true }));
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+     origin: [
+      "http://localhost:3000",              
+      "https://sentinalai-jade.vercel.app/", 
+    ],
     methods: ["GET", "POST"],
   },
 });
