@@ -635,7 +635,7 @@ const GlobalStyles = () => (
 
 export default function ResultPage({ params }: PageProps) {
   const router = useRouter();
-  const attemptId = params.attemptId;
+  const attemptId = params?.attemptId as string;
   const [result, setResult] = useState<Result | null>(null);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
