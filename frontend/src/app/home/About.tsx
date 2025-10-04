@@ -405,10 +405,27 @@ export default function CenterVideoSection() {
       </h1>
 
       {/* Video / Media block */}
-      <div className="media-block relative w-full max-w-5xl h-[37rem] bg-gray-700 rounded-xl overflow-hidden flex items-center justify-center mt-20 mb-12">
+      {/* <div className="media-block relative w-full max-w-5xl h-[37rem] bg-gray-700 rounded-xl overflow-hidden flex items-center justify-center mt-20 mb-12">
         <div className="absolute inset-0 bg-cyan-500/10"></div>
         <span className="text-gray-400 font-mono">VIDEO PLACEHOLDER</span>
-      </div>
+      </div> */}
+
+
+      <div className="media-block relative w-full max-w-5xl h-[37rem] bg-gray-700 rounded-xl overflow-hidden flex items-center justify-center mt-20 mb-12">
+  <div className="absolute inset-0 bg-cyan-500/10"></div>
+  
+  <video
+    src="/video.mp4"
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="w-full h-full object-cover rounded-xl"
+  >
+    <source src="/video.mp4" type="video/mp4" />
+  </video>
+</div>
+
 
       
 

@@ -1,5 +1,6 @@
 import Test from '../models/test.js';
 import Attempt from '../models/Attempt.js';
+import Complaint from '../models/Complaint.js';
 
 // export const getDashboardStats = async (req, res) => {
 //   try {
@@ -161,4 +162,44 @@ export const getRecentActivity = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error fetching recent activity.', error });
     }
+};
+
+
+
+
+
+export const getComplaints = async (req, res) => {
+  try {
+    const complaints = await Complaint.find({})
+      .populate('studentId', 'email')
+      .populate({
+        path: 'attemptId',
+        populate: {
+          path: 'testId',
+          model: 'Test',
+          select: 'title'
+        }
+      })
+      .sort({ createdAt: -1 });
+    res.status(200).json(complaints);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching complaints.', error });
+  }
+};
+
+export const updateComplaintStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const complaint = await Complaint.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    );
+    if (!complaint) {
+      return res.status(404).json({ message: 'Complaint not found.' });
+    }
+    res.status(200).json(complaint);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating complaint status.', error });
+  }
 };

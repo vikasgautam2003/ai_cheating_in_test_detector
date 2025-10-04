@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 
+
 import connectDB from "./db.js";
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -16,6 +17,7 @@ import attemptRoutes from './routes/attemptRoutes.js';
 import setupSocket from './socket/index.js';
 import adminRoutes from './routes/adminRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
+import complaintRoutes from './routes/complaintRoutes.js';
 
 
 dotenv.config();
@@ -23,7 +25,11 @@ dotenv.config();
 const app = express();
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -49,6 +55,7 @@ app.use('/api/results', resultRoutes);
 app.use('/api/attempts', attemptRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
+app.use('/api/complaints', complaintRoutes);
 
 
 app.get('/', (req, res) => {
