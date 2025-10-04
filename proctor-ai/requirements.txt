@@ -5,3 +5,4 @@ numpy
 webrtcvad-wheels
 soundfile
 pydantic
+pydub
