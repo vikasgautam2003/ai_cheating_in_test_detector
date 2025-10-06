@@ -1,102 +1,57 @@
 [
   {
-    "questionText": "What is Artificial Intelligence?",
-    "options": ["A branch of biology", "Simulation of human intelligence by machines", "A type of database", "None of the above"],
-    "correctAnswer": "Simulation of human intelligence by machines"
+    "questionText": "What is the main goal of system design?",
+    "options": ["To define UI layouts", "To specify hardware cost", "To design architecture and components of a system", "To write code directly"],
+    "correctAnswer": "To design architecture and components of a system"
   },
   {
-    "questionText": "Who is known as the father of Artificial Intelligence?",
-    "options": ["Alan Turing", "John McCarthy", "Marvin Minsky", "Herbert Simon"],
-    "correctAnswer": "John McCarthy"
+    "questionText": "Which of the following is NOT a non-functional requirement in system design?",
+    "options": ["Scalability", "Reliability", "Performance", "Sorting algorithm"],
+    "correctAnswer": "Sorting algorithm"
   },
   {
-    "questionText": "Which of these is a type of AI?",
-    "options": ["Narrow AI", "General AI", "Super AI", "All of the above"],
-    "correctAnswer": "All of the above"
+    "questionText": "What is load balancing?",
+    "options": ["Balancing memory usage inside CPU", "Distributing traffic across multiple servers", "Creating backups of data", "Dividing tasks among developers"],
+    "correctAnswer": "Distributing traffic across multiple servers"
   },
   {
-    "questionText": "What is Machine Learning?",
-    "options": ["A method for machines to learn from data", "A hardware process", "A computer virus", "A database management system"],
-    "correctAnswer": "A method for machines to learn from data"
+    "questionText": "Which database type is best suited for highly relational data?",
+    "options": ["NoSQL", "SQL", "Flat File", "Key-Value Store"],
+    "correctAnswer": "SQL"
   },
   {
-    "questionText": "Which language is most popular for AI development?",
-    "options": ["Java", "Python", "C#", "PHP"],
-    "correctAnswer": "Python"
+    "questionText": "What is the purpose of caching in system design?",
+    "options": ["To increase system cost", "To store data permanently", "To reduce latency and improve response times", "To replace databases"],
+    "correctAnswer": "To reduce latency and improve response times"
   },
   {
-    "questionText": "Which of these is a supervised learning algorithm?",
-    "options": ["Linear Regression", "K-Means Clustering", "Apriori Algorithm", "None of the above"],
-    "correctAnswer": "Linear Regression"
+    "questionText": "Which of the following is an example of horizontal scaling?",
+    "options": ["Adding more CPUs to a single server", "Increasing RAM in one machine", "Adding more servers to handle load", "Optimizing code"],
+    "correctAnswer": "Adding more servers to handle load"
   },
   {
-    "questionText": "What does NLP stand for in AI?",
-    "options": ["Natural Language Processing", "Neural Language Programming", "New Learning Protocol", "None of the above"],
-    "correctAnswer": "Natural Language Processing"
+    "questionText": "What is a CDN (Content Delivery Network) used for?",
+    "options": ["Compressing videos", "Distributing content closer to users to reduce latency", "Encrypting data", "Replacing backend servers"],
+    "correctAnswer": "Distributing content closer to users to reduce latency"
   },
   {
-    "questionText": "What is the main goal of AI?",
-    "options": ["To replace humans", "To make computers intelligent", "To create new hardware", "To store data"],
-    "correctAnswer": "To make computers intelligent"
+    "questionText": "What is the CAP theorem in distributed systems?",
+    "options": [
+      "It states you can only have two out of Consistency, Availability, and Partition Tolerance",
+      "It explains CPU, API, and Performance",
+      "It describes memory usage",
+      "It defines caching strategies"
+    ],
+    "correctAnswer": "It states you can only have two out of Consistency, Availability, and Partition Tolerance"
   },
   {
-    "questionText": "Which is NOT a component of AI?",
-    "options": ["Machine Learning", "Expert Systems", "Computer Vision", "Cloud Storage"],
-    "correctAnswer": "Cloud Storage"
+    "questionText": "What is the purpose of sharding in databases?",
+    "options": ["To encrypt data", "To split data into smaller chunks across multiple machines", "To create indexes", "To remove redundant data"],
+    "correctAnswer": "To split data into smaller chunks across multiple machines"
   },
   {
-    "questionText": "What is Deep Learning?",
-    "options": ["A type of neural network", "A database process", "A software tool", "A hardware technology"],
-    "correctAnswer": "A type of neural network"
-  },
-  {
-    "questionText": "Which AI concept mimics the human brain?",
-    "options": ["Neural Networks", "Decision Trees", "Regression Models", "Genetic Algorithms"],
-    "correctAnswer": "Neural Networks"
-  },
-  {
-    "questionText": "Which of these is an application of AI?",
-    "options": ["Speech Recognition", "Recommendation Systems", "Image Classification", "All of the above"],
-    "correctAnswer": "All of the above"
-  },
-  {
-    "questionText": "What is reinforcement learning?",
-    "options": ["Learning by trial and error", "Learning by memorization", "Learning by programming", "Learning by example"],
-    "correctAnswer": "Learning by trial and error"
-  },
-  {
-    "questionText": "Which is an example of Narrow AI?",
-    "options": ["Chess-playing AI", "Self-aware AI", "General problem-solving AI", "All of the above"],
-    "correctAnswer": "Chess-playing AI"
-  },
-  {
-    "questionText": "What is a chatbot?",
-    "options": ["A software for chatting", "An AI program that simulates conversation", "A type of neural network", "A hardware device"],
-    "correctAnswer": "An AI program that simulates conversation"
-  },
-  {
-    "questionText": "Which of these is a limitation of AI?",
-    "options": ["High computation cost", "Limited creativity", "Data dependency", "All of the above"],
-    "correctAnswer": "All of the above"
-  },
-  {
-    "questionText": "What is computer vision in AI?",
-    "options": ["Ability to process images and videos", "Ability to compute numbers", "Ability to store data", "Ability to generate text"],
-    "correctAnswer": "Ability to process images and videos"
-  },
-  {
-    "questionText": "Which AI technique is used for pattern recognition?",
-    "options": ["Neural Networks", "Sorting algorithms", "Binary search", "Compression algorithms"],
-    "correctAnswer": "Neural Networks"
-  },
-  {
-    "questionText": "What is the Turing Test?",
-    "options": ["A test for AI's ability to exhibit human-like intelligence", "A speed test for computers", "A programming contest", "None of the above"],
-    "correctAnswer": "A test for AI's ability to exhibit human-like intelligence"
-  },
-  {
-    "questionText": "Which is a challenge in AI?",
-    "options": ["Bias in data", "High cost of computation", "Lack of interpretability", "All of the above"],
-    "correctAnswer": "All of the above"
+    "questionText": "Which architecture is most commonly used in scalable web applications?",
+    "options": ["Monolithic Architecture", "Client-Server Architecture", "Microservices Architecture", "Single-tier Architecture"],
+    "correctAnswer": "Microservices Architecture"
   }
 ]
