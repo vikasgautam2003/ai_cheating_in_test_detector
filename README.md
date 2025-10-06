@@ -26,7 +26,7 @@ Sentinel.ai is a comprehensive solution for conducting secure, proctored online 
 
 The system is designed with distinct, feature-rich dashboards for both students and administrators, providing a complete end-to-end experience from test creation to detailed post-exam analysis.
 
-![Project Screenshot]()
+![Project Screenshot](/frontend/public/s1.png)
 
 ---
 
