@@ -39,10 +39,39 @@ const MessageSquareIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
 );
 
+const WandSparklesIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M21 3v4" />
+    <path d="M23 5h-4" />
+    <path d="M8 9l3 3L8 15l-3-3z" />
+    <path d="M9 5v2" />
+    <path d="M5 5h2" />
+    <path d="M19 11v2" />
+    <path d="M17 13h4" />
+    <path d="M11 19v2" />
+    <path d="M9 21h4" />
+  </svg>
+);
+
+
+
+
 const Sidebar = ({ onNavigate, activeView }: { onNavigate: (path: string) => void; activeView: string; }) => {
     const navItems = [
         { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboardIcon, path: '/admin' },
         { id: 'tests', label: 'Tests', icon: FileTextIcon, path: '/admin/tests' },
+        { id: 'generate', label: 'AI Generator', icon: WandSparklesIcon, path: '/admin/generate-questions' },
         { id: 'attempts', label: 'Attempts', icon: UsersIcon, path: '/admin/attempts' },
         { id: 'settings', label: 'Manage Tests', icon: SettingsIcon, path: '/admin/settings' },
         { id: 'complaint', label: 'Complaints', icon: MessageSquareIcon, path: '/admin/complaints' }
