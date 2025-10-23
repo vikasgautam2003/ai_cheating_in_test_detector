@@ -156,7 +156,7 @@ export default function AudioRecorder({ onAudioRecorded }: AudioRecorderProps) {
   };
 
   return (
-    <div className="w-full max-w-md p-6 border border-gray-300 rounded-2xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 shadow-xl backdrop-blur-md">
+    <div className="w-full max-w-md p-6 border border-gray-300 rounded-2xl bg-linear-to-br from-gray-900/80 to-gray-800/80 shadow-xl backdrop-blur-md">
       <h3 className="font-bold text-xl text-center text-white mb-4 tracking-wide">Audio Verification</h3>
       {!permission ? (
         <button

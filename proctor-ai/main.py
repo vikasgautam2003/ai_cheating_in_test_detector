@@ -151,16 +151,3 @@ def analyze_audio_clip(clip: AudioClip):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Audio analysis failed: {str(e)}")
-
-
-
-
-
-
-
-
-
-
-
-
-

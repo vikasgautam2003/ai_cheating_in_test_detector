@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import { useEffect, useState, ChangeEvent, useCallback } from 'react';
@@ -669,10 +668,3 @@ if (stage === 'instructions') {
         </>
     );
 }
-
-
-
-
-
-
-
