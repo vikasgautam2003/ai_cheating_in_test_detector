@@ -45,7 +45,7 @@ export default function AudioMonitor({ onAudioClipRecorded }: AudioMonitorProps)
           setTimeout(() => {
             mediaRecorderRef.current?.stop()
           }, 4000)
-        }, 15000)
+        }, 5000)
       } catch (err) {
         setError("Microphone access was denied. Proctoring requires audio access.")
       }
