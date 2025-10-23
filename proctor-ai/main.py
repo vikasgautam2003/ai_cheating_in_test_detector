@@ -73,7 +73,9 @@ def analyze_video_frame(frame: ImageFrame):
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
         if img is None:
+         
             raise HTTPException(status_code=400, detail="Could not decode image.")
+       
 
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(
