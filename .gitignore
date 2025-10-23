@@ -1,0 +1,10 @@
+# Python virtual environment
+proctor-ai/venv/
+*.pyc
+__pycache__/
+
+# Large data/models
+*.dll
+*.so
+*.exe
+*.zip

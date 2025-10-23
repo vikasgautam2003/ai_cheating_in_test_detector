@@ -1,0 +1,57 @@
+[
+  {
+    "questionText": "What is the main goal of system design?",
+    "options": ["To define UI layouts", "To specify hardware cost", "To design architecture and components of a system", "To write code directly"],
+    "correctAnswer": "To design architecture and components of a system"
+  },
+  {
+    "questionText": "Which of the following is NOT a non-functional requirement in system design?",
+    "options": ["Scalability", "Reliability", "Performance", "Sorting algorithm"],
+    "correctAnswer": "Sorting algorithm"
+  },
+  {
+    "questionText": "What is load balancing?",
+    "options": ["Balancing memory usage inside CPU", "Distributing traffic across multiple servers", "Creating backups of data", "Dividing tasks among developers"],
+    "correctAnswer": "Distributing traffic across multiple servers"
+  },
+  {
+    "questionText": "Which database type is best suited for highly relational data?",
+    "options": ["NoSQL", "SQL", "Flat File", "Key-Value Store"],
+    "correctAnswer": "SQL"
+  },
+  {
+    "questionText": "What is the purpose of caching in system design?",
+    "options": ["To increase system cost", "To store data permanently", "To reduce latency and improve response times", "To replace databases"],
+    "correctAnswer": "To reduce latency and improve response times"
+  },
+  {
+    "questionText": "Which of the following is an example of horizontal scaling?",
+    "options": ["Adding more CPUs to a single server", "Increasing RAM in one machine", "Adding more servers to handle load", "Optimizing code"],
+    "correctAnswer": "Adding more servers to handle load"
+  },
+  {
+    "questionText": "What is a CDN (Content Delivery Network) used for?",
+    "options": ["Compressing videos", "Distributing content closer to users to reduce latency", "Encrypting data", "Replacing backend servers"],
+    "correctAnswer": "Distributing content closer to users to reduce latency"
+  },
+  {
+    "questionText": "What is the CAP theorem in distributed systems?",
+    "options": [
+      "It states you can only have two out of Consistency, Availability, and Partition Tolerance",
+      "It explains CPU, API, and Performance",
+      "It describes memory usage",
+      "It defines caching strategies"
+    ],
+    "correctAnswer": "It states you can only have two out of Consistency, Availability, and Partition Tolerance"
+  },
+  {
+    "questionText": "What is the purpose of sharding in databases?",
+    "options": ["To encrypt data", "To split data into smaller chunks across multiple machines", "To create indexes", "To remove redundant data"],
+    "correctAnswer": "To split data into smaller chunks across multiple machines"
+  },
+  {
+    "questionText": "Which architecture is most commonly used in scalable web applications?",
+    "options": ["Monolithic Architecture", "Client-Server Architecture", "Microservices Architecture", "Single-tier Architecture"],
+    "correctAnswer": "Microservices Architecture"
+  }
+]
