@@ -126,7 +126,7 @@ def analyze_audio_clip(clip: AudioClip):
             return (frame.astype(np.float32) ** 2).mean() ** 0.5
 
         rms_threshold = 1000  # increase for more leniency
-        consecutive_speech_required = 2  # number of consecutive frames to trigger speech
+        consecutive_speech_required = 1  # number of consecutive frames to trigger speech
         speech_count = 0
         speech_detected = False
 
