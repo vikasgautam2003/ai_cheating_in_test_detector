@@ -4,23 +4,23 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ServerIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className={className}>
+    <rect x="2" y="2" width="20" height="8" rx="2"></rect>
+    <rect x="2" y="14" width="20" height="8" rx="2"></rect>
     <line x1="6" y1="6" x2="6.01" y2="6"></line>
     <line x1="6" y1="18" x2="6.01" y2="18"></line>
   </svg>
 );
 
 const BrainIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className={className}>
     <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path>
     <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path>
   </svg>
 );
 
 const CheckIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className={className}>
     <polyline points="20 6 9 17 4 12"></polyline>
   </svg>
 );
@@ -66,7 +66,7 @@ export default function SentinelLoader({ onReady }: { onReady: () => void }) {
     if (serverAwake && aiAwake) {
       const timeout = setTimeout(() => {
         setIsExiting(true);
-        setTimeout(() => onReady(), 1000);
+        setTimeout(() => onReady(), 900);
       }, 1500);
       return () => clearTimeout(timeout);
     }
@@ -74,7 +74,15 @@ export default function SentinelLoader({ onReady }: { onReady: () => void }) {
 
   const containerVariants = {
     initial: { opacity: 1 },
-    exit: { opacity: 0, scale: 1.1, filter: 'blur(10px)', transition: { duration: 0.8, ease: 'easeInOut' } }
+    exit: {
+      opacity: 0,
+      scale: 1.1,
+      filter: "blur(10px)",
+      transition: {
+        duration: 0.8,
+        ease: [0.42, 0.0, 0.58, 1.0],
+      },
+    },
   };
 
   return (
@@ -99,19 +107,19 @@ export default function SentinelLoader({ onReady }: { onReady: () => void }) {
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px]"
             animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.1, 1] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
 
           <div className="relative mb-12">
             <motion.div
               className="w-32 h-32 border-2 border-cyan-500/30 rounded-full"
               animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             />
             <motion.div
               className="absolute top-2 left-2 w-28 h-28 border-t-2 border-b-2 border-cyan-400 rounded-full"
               animate={{ rotate: -360 }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
             />
             <motion.div
               className="absolute top-1/2 left-1/2 w-4 h-4 bg-cyan-400 rounded-full -translate-x-1/2 -translate-y-1/2 shadow-[0_0_20px_rgba(34,211,238,0.8)]"
@@ -156,16 +164,26 @@ function StatusRow({ label, isAwake, icon }: { label: string; isAwake: boolean; 
       </div>
       <div className="flex items-center">
         {isAwake ? (
-          <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex items-center gap-2 text-green-400">
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ ease: [0.42, 0.0, 0.58, 1.0], duration: 0.4 }}
+            className="flex items-center gap-2 text-green-400"
+          >
             <span className="text-xs font-bold">ONLINE</span>
             <CheckIcon className="w-4 h-4" />
           </motion.div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-cyan-700 animate-pulse">BOOTING...</span>
-            <motion.div className="w-2 h-2 bg-cyan-700 rounded-full" animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 1, repeat: Infinity }} />
-          </div>
-        )}
+        ) :
+          (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-cyan-700 animate-pulse">BOOTING...</span>
+              <motion.div
+                className="w-2 h-2 bg-cyan-700 rounded-full"
+                animate={{ scale: [1, 1.5, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              />
+            </div>
+          )}
       </div>
     </div>
   );
