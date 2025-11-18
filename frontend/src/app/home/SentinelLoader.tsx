@@ -28,7 +28,7 @@ const CheckIcon = ({ className }: { className?: string }) => (
 export default function SentinelLoader({ onReady }: { onReady: () => void }) {
   const [serverAwake, setServerAwake] = useState(false);
   const [aiAwake, setAiAwake] = useState(false);
-  const [isExiting, setIsExiting] = useState(false);
+  const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
     const pingServer = async () => {
@@ -48,52 +48,39 @@ export default function SentinelLoader({ onReady }: { onReady: () => void }) {
     if (!serverAwake) pingServer();
     if (!aiAwake) pingAI();
 
-    const serverInterval = setInterval(() => {
-      if (!serverAwake) pingServer();
-    }, 2000);
-
-    const aiInterval = setInterval(() => {
-      if (!aiAwake) pingAI();
-    }, 2000);
+    const sInt = setInterval(() => { if (!serverAwake) pingServer(); }, 2000);
+    const aInt = setInterval(() => { if (!aiAwake) pingAI(); }, 2000);
 
     return () => {
-      clearInterval(serverInterval);
-      clearInterval(aiInterval);
+      clearInterval(sInt);
+      clearInterval(aInt);
     };
   }, [serverAwake, aiAwake]);
 
   useEffect(() => {
     if (serverAwake && aiAwake) {
-      const timeout = setTimeout(() => {
-        setIsExiting(true);
-        setTimeout(() => onReady(), 900);
+      const t = setTimeout(() => {
+        setExiting(true);
+        setTimeout(() => onReady(), 800);
       }, 1500);
-      return () => clearTimeout(timeout);
+      return () => clearTimeout(t);
     }
   }, [serverAwake, aiAwake, onReady]);
 
-  const containerVariants = {
-    initial: { opacity: 1 },
-    exit: {
-      opacity: 0,
-      scale: 1.1,
-      filter: "blur(10px)",
-      transition: {
-        duration: 0.8,
-        ease: [0.42, 0.0, 0.58, 1.0],
-      },
-    },
-  };
-
   return (
     <AnimatePresence>
-      {!isExiting && (
+      {!exiting && (
         <motion.div
           key="loader"
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#020617] text-cyan-500 font-mono overflow-hidden"
-          variants={containerVariants}
-          initial="initial"
-          exit="exit"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
+          exit={{
+            opacity: 0,
+            scale: 1.1,
+            filter: "blur(10px)",
+            transition: { duration: 0.8 }
+          }}
         >
           <div
             className="absolute inset-0 opacity-20 pointer-events-none"
@@ -107,19 +94,19 @@ export default function SentinelLoader({ onReady }: { onReady: () => void }) {
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px]"
             animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.1, 1] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 4, repeat: Infinity }}
           />
 
           <div className="relative mb-12">
             <motion.div
               className="w-32 h-32 border-2 border-cyan-500/30 rounded-full"
               animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 10, repeat: Infinity }}
             />
             <motion.div
               className="absolute top-2 left-2 w-28 h-28 border-t-2 border-b-2 border-cyan-400 rounded-full"
               animate={{ rotate: -360 }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 5, repeat: Infinity }}
             />
             <motion.div
               className="absolute top-1/2 left-1/2 w-4 h-4 bg-cyan-400 rounded-full -translate-x-1/2 -translate-y-1/2 shadow-[0_0_20px_rgba(34,211,238,0.8)]"
@@ -167,23 +154,22 @@ function StatusRow({ label, isAwake, icon }: { label: string; isAwake: boolean; 
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ ease: [0.42, 0.0, 0.58, 1.0], duration: 0.4 }}
+            transition={{ duration: 0.4 }}
             className="flex items-center gap-2 text-green-400"
           >
             <span className="text-xs font-bold">ONLINE</span>
             <CheckIcon className="w-4 h-4" />
           </motion.div>
-        ) :
-          (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-cyan-700 animate-pulse">BOOTING...</span>
-              <motion.div
-                className="w-2 h-2 bg-cyan-700 rounded-full"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              />
-            </div>
-          )}
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-cyan-700 animate-pulse">BOOTING...</span>
+            <motion.div
+              className="w-2 h-2 bg-cyan-700 rounded-full"
+              animate={{ scale: [1, 1.5, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
