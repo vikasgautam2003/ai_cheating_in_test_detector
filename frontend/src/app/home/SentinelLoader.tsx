@@ -128,8 +128,8 @@ export default function SentinelLoader({ onReady }: { onReady: () => void }) {
           </motion.p>
 
           <div className="flex flex-col gap-4 w-80">
-            <StatusRow label="Core Relay Node" isAwake={serverAwake} icon={<ServerIcon className="w-5 h-5" />} />
-            <StatusRow label="Neural Vision Engine" isAwake={aiAwake} icon={<BrainIcon className="w-5 h-5" />} />
+            <StatusRow label="System Core" isAwake={serverAwake} icon={<ServerIcon className="w-5 h-5" />} />
+            <StatusRow label="Analysis Microservice" isAwake={aiAwake} icon={<BrainIcon className="w-5 h-5" />} />
           </div>
 
           <div className="absolute bottom-10 text-xs text-cyan-800 text-center max-w-md px-4 leading-relaxed">
