@@ -46,13 +46,24 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"], 
+    
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
-    
+    allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 
 cascade_path = os.path.join(cv2.data.haarcascades, 'haarcascade_frontalface_default.xml')
 if not os.path.exists(cascade_path):
