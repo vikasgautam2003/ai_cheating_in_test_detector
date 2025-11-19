@@ -58,7 +58,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+   
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -73,6 +73,16 @@ face_cascade = cv2.CascadeClassifier(cascade_path)
 @app.get("/")
 def read_root():
     return {"message": "Hello from the Proctoring AI Service!"}
+
+
+
+@app.get("/ping")
+def ping():
+    """
+    Lightweight endpoint to wake up the service and check health.
+    """
+    return {"status": "ok", "service": "ai-proctor"}
+
 
 @app.post("/analyze-video-frame")
 def analyze_video_frame(frame: ImageFrame):
